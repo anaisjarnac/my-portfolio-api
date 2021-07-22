@@ -1,13 +1,13 @@
-const { findMany, create, getOne, delete_ } = require("../models/projects");
+const { find, create, findByCategory, delete_ } = require("../models/projects");
 
-const getProjects = async (req, res) => {
-  const [project] = await getOne(req.params.id);
-  res.status(200).json(ad);
+const getProject = async (req, res) => {
+  const [project] = await findByCategory(req.params.id);
+  res.status(200).json(project);
 };
 
 const getProjects = async (req, res) => {
-  const [projects] = await findMany(req.query);
-  res.status(200).json(ads);
+  const [projects] = await find(req.query);
+  res.status(200).json(projects);
 };
 
 const createProjects = async (req, res) => {
@@ -19,7 +19,7 @@ const createProjects = async (req, res) => {
   }
 };
 
-const deleteProjects = async (req, res) => {
+const deleteProject = async (req, res) => {
   try {
     await delete_(req.params.id);
     res.status(204).send();
@@ -29,8 +29,8 @@ const deleteProjects = async (req, res) => {
 };
 
 module.exports = {
-  getProjects,
+  getProject,
   createProjects,
   getProjects,
-  deleteProjects,
+  deleteProject,
 };
